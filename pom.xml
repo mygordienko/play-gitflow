@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>play-gitflow</artifactId>
+	<version>0.0.1-001-SNAPSHOT</version>
+	<name>play-gitflow</name>
+	<description>Demo project for Spring Boot and Gitflow plugin</description>
+	<properties>
+		<java.version>11</java.version>
+		<gitflow.plugin.version>1.15.1</gitflow.plugin.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+				<version>${gitflow.plugin.version}</version>
+				<configuration>
+					<installProject>false</installProject>
+					<verbose>true</verbose>
+
+					<pushRemote>false</pushRemote>
+					<versionDigitToIncrement>1</versionDigitToIncrement>
+					<commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
+
+					<preFeatureFinishGoals>clean verify -U</preFeatureFinishGoals>
+					<postFeatureFinishGoals>clean verify -U</postFeatureFinishGoals>
+
+					<preReleaseGoals>clean verify -U</preReleaseGoals>
+					<postReleaseGoals>clean verify -U</postReleaseGoals>
+
+					<preHotfixGoals>clean verify -U</preHotfixGoals>
+					<postHotfixGoals>clean verify -U</postHotfixGoals>
+
+					<gitFlowConfig>
+						<productionBranch>master</productionBranch>
+						<developmentBranch>develop</developmentBranch>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<supportBranchPrefix>support/</supportBranchPrefix>
+						<versionTagPrefix>v</versionTagPrefix>
+						<origin>origin</origin>
+					</gitFlowConfig>
+
+					<commitMessages>
+						<featureStartMessage>Update versions for feature branch</featureStartMessage>
+						<featureFinishMessage>Update versions for development branch</featureFinishMessage>
+
+						<hotfixStartMessage>Update versions for hotfix</hotfixStartMessage>
+						<hotfixFinishMessage>Update for next development version</hotfixFinishMessage>
+
+						<hotfixVersionUpdateMessage>Update to hotfix version</hotfixVersionUpdateMessage>
+
+						<releaseStartMessage>Update versions for release</releaseStartMessage>
+						<releaseFinishMessage>Update for next development version</releaseFinishMessage>
+
+						<releaseVersionUpdateMessage>Update for next development version</releaseVersionUpdateMessage>
+
+						<!-- git merge messages -->
+						<!-- Default git merge commit message will be used if left empty or undefined. -->
+
+						<releaseFinishMergeMessage></releaseFinishMergeMessage>
+						<releaseFinishDevMergeMessage></releaseFinishDevMergeMessage>
+
+						<featureFinishDevMergeMessage></featureFinishDevMergeMessage>
+
+						<hotfixFinishMergeMessage></hotfixFinishMergeMessage>
+						<hotfixFinishDevMergeMessage></hotfixFinishDevMergeMessage>
+						<hotfixFinishReleaseMergeMessage></hotfixFinishReleaseMergeMessage>
+						<hotfixFinishSupportMergeMessage></hotfixFinishSupportMergeMessage>
+
+						<!-- / git merge messages -->
+
+						<tagHotfixMessage>Tag hotfix</tagHotfixMessage>
+						<tagReleaseMessage>Tag release</tagReleaseMessage>
+
+						<!-- Migration Note: This was called <updateDevToAvoidConflitsMessage> in version 1.11.0, but has been deprecated in favour of the correctly spelt one below. -->
+						<updateDevToAvoidConflictsMessage>Update develop to production version to avoid merge conflicts</updateDevToAvoidConflictsMessage>
+						<updateDevBackPreMergeStateMessage>Update develop version back to pre-merge state</updateDevBackPreMergeStateMessage>
+
+						<updateReleaseToAvoidConflictsMessage>Update release to hotfix version to avoid merge conflicts</updateReleaseToAvoidConflictsMessage>
+						<updateReleaseBackPreMergeStateMessage>Update release version back to pre-merge state</updateReleaseBackPreMergeStateMessage>
+					</commitMessages>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
