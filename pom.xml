@@ -71,7 +71,7 @@
 					<postHotfixGoals>clean verify -U</postHotfixGoals>
 
 					<gitFlowConfig>
-						<productionBranch>master</productionBranch>
+						<productionBranch>main</productionBranch>
 						<developmentBranch>develop</developmentBranch>
 						<featureBranchPrefix>feature/</featureBranchPrefix>
 						<releaseBranchPrefix>release/</releaseBranchPrefix>
